@@ -75,12 +75,47 @@ return <li>{data($x/titulo)}: {data($x/precio)} €</li>
 
 1. Mostrar el nombre de los alumnos aprobados.
 
+```
+for $x in doc("alumnos.xml")/alumnos/alumno
+where $x/nota>5
+return $x/nombre
+```
+
 2. Mostrar el DNI y la nota de los alumnos que han aprobado.
+
+```
+for $x in doc("alumnos.xml")/alumnos/alumno
+where $x/nota>5
+return <aprobados>El alumno con DNI {data($x/@dni)} ha aprobado con un {data($x/nota)}</aprobados>
+```
 
 3. Indicar el nombre de los alumnos cuyas notas están entre 6 y 8 (ambas inclusive).
 
+```
+for $x in doc("alumnos.xml")/alumnos/alumno
+where $x/nota>=6 and $x/nota<=8
+return $x/nombre
+```
+
 4. Mostrar listado de nombres ordenados por apellidos.
+
+```
+for $x in doc("alumnos.xml")/alumnos/alumno
+order by $x/apells
+return $x/nombre
+```
 
 5. Mostrar nombres ordenados por DNI.
 
+```
+for $x in doc("alumnos.xml")/alumnos/alumno
+order by $x/@dni
+return $x/nombre
+```
+
 6. Mostrar el Nº de cada alumno y su nombre.
+
+```
+for $x at $i in doc("alumnos.xml")/alumnos/alumno
+return <alumno>{$i}. {data($x/nombre)}</alumno>
+```
