@@ -31,7 +31,16 @@ return <response>{data($x/titulo)} tiene {count($x/autores/autor)} autor/es</res
 
 5. Libros que tienen varios autores y libros que tienen un autor
 
-
+```
+for $x in doc("libros.xml")/libros/libro
+where count($x/autores/autor)>1
+return $x/titulo
+```
+```
+for $x in doc("libros.xml")/libros/libro
+where count($x/autores/autor)=1
+return $x/titulo
+```
 
 6. Libros cuyo autor es “Axel”.
 
